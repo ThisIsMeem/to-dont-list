@@ -43,11 +43,16 @@ class _ToDoDialogState extends State<ToDoDialog> {
           key: const Key("OKButton"),
           style: yesStyle,
           child: const Text('OK'),
-          onPressed: () {
-            setState(() {
-              Navigator.pop(context);
-            });
-          },
+            onPressed:  _inputController.text.isNotEmpty
+                  ? () {
+                      setState(() {
+                        widget.onListAdded(valueText, _inputController);
+                        Navigator.pop(context);
+                      });
+                    }
+                  : null,
+          
+        
         ),
 
         // https://stackoverflow.com/questions/52468987/how-to-turn-disabled-button-into-enabled-button-depending-on-conditions
@@ -57,15 +62,13 @@ class _ToDoDialogState extends State<ToDoDialog> {
             return ElevatedButton(
               key: const Key("CancelButton"),
               style: noStyle,
-              onPressed: value.text.isNotEmpty
-                  ? () {
-                      setState(() {
-                        widget.onListAdded(valueText, _inputController);
-                        Navigator.pop(context);
-                      });
-                    }
-                  : null,
+            
               child: const Text('Cancel'),
+              onPressed: () {
+                setState(() {
+                  Navigator.pop(context);
+                });
+              },
             );
           },
         ),
