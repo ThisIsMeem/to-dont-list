@@ -12,6 +12,8 @@ import 'package:to_dont_list/main.dart';
 import 'package:to_dont_list/objects/item.dart';
 import 'package:to_dont_list/widgets/to_do_items.dart';
 
+import 'package:to_dont_list/objects/recipe.dart';
+
 void main() {
   test('Item abbreviation should be first letter', () {
     const item = Item(name: "add more todos");
@@ -87,4 +89,13 @@ void main() {
   });
 
   // One to test the tap and press actions on the items?
+  test('Recipe ingredientCount should return number of ingredients', () {
+  const recipe = Recipe(
+    name: "Pasta",
+    ingredients: ["pasta", "sauce", "cheese"],
+    cookTime: 20,
+    category: "dinner",
+  );
+  expect(recipe.ingredientCount(), 3);
+});
 }
